@@ -1,0 +1,9 @@
+# Copyright © 2016 Stéphane Veyret stephane_DOT_veyret_AT_neptura_DOT_org
+# Distributed under the terms of the GNU General Public License v3
+
+# An editor is provided by busybox
+virtual/editor-0
+
+# sys-apps/shadow is part of the system, but may not be pulled by virtual
+# package if installing in a prefixed system
+virtual/shadow-0

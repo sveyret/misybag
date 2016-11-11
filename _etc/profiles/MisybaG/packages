@@ -1,0 +1,10 @@
+# Copyright © 2016 Stéphane Veyret stephane_DOT_veyret_AT_neptura_DOT_org
+# Distributed under the terms of the GNU General Public License v3
+
+# MisybaG Base Profile
+# Here are the packages needed for a minimum MisybaG system
+
+*sys-apps/misybag-baselayout
+*net-misc/openssh
+*sys-apps/busybox
+*sys-apps/shadow

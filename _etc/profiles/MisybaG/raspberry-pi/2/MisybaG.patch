@@ -1,0 +1,31 @@
+diff --no-dereference -Naur a/_custom/new.sh b/_custom/new.sh
+--- a/_custom/new.sh	1970-01-01 01:00:00.000000000 +0100
++++ b/_custom/new.sh	2016-11-13 15:40:33.131358669 +0100
+@@ -0,0 +1,8 @@
++#!/bin/bash
++
++# Add random generator to boot runlevel
++ln -s ../../init.d/rngd _layout/etc/runlevel/boot/04-rngd
++
++# Add heartbeat to boot runlevel
++chmod +x _layout/etc/init.d/heartbeat
++ln -s ../../init.d/heartbeat _layout/etc/runlevel/boot/99-heartbeat
+diff --no-dereference -Naur a/_layout/etc/init.d/heartbeat b/_layout/etc/init.d/heartbeat
+--- a/_layout/etc/init.d/heartbeat	1970-01-01 01:00:00.000000000 +0100
++++ b/_layout/etc/init.d/heartbeat	2016-11-13 15:39:37.565360066 +0100
+@@ -0,0 +1,15 @@
++#!/sbin/openrc-run
++# Copyright © 2016 Stéphane Veyret stephane_DOT_veyret_AT_neptura_DOT_org
++# Distributed under the terms of the GNU General Public License v3
++
++start() {
++	if [[ -f /sys/class/leds/led1/trigger ]]; then
++		echo "heartbeat" >/sys/class/leds/led1/trigger
++	fi
++}
++
++stop() {
++	if [[ -f /sys/class/leds/led1/trigger ]]; then
++		echo "default-on" >/sys/class/leds/led1/trigger
++	fi
++}

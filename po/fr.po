@@ -1,0 +1,116 @@
+# French translations for MisybaG.
+# Copyright © 2016 Stéphane Veyret stephane_DOT_veyret_AT_neptura_DOT_org
+# This file is distributed under the same license as the PACKAGE MisybaG.
+# Stéphane Veyret <stephane_DOT_veyret_AT_neptura_DOT_org>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: MisybaG 0.1\n"
+"Report-Msgid-Bugs-To: Stéphane Veyret\n"
+"POT-Creation-Date: 2016-11-13 21:26+0100\n"
+"PO-Revision-Date: 2016-11-13 21:26+0100\n"
+"Last-Translator: Stéphane Veyret <stephane_DOT_veyret_AT_neptura_DOT_org>\n"
+"Language-Team: Stéphane Veyret <stephane_DOT_veyret_AT_neptura_DOT_org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: misybag:31
+#, sh-format
+msgid "Usage: ${msbg_name} [new|sys-install|update] [parameters]"
+msgstr "Syntaxe : ${msbg_name} [new|sys-install|update] [paramètres]"
+
+#: misybag:33
+#, sh-format
+msgid "${msbg_name} new profile_name [dir_name]"
+msgstr "${msbg_name} new nom_du_profile [nom_du_répertoire]"
+
+#: misybag:34
+#, sh-format
+msgid "Create a new MisybaG project using given profile_name in dir_name."
+msgstr ""
+"Créer un nouveau projet MisybaG en utilisant les nom_du_profile et\\n"
+"nom_du_répertoire fournis."
+
+#: misybag:35
+#, sh-format
+msgid ""
+"profile_name is a MisybaG profile name, i.e. the path of the sub-directory "
+"of:"
+msgstr ""
+"nom_du_profile est un nom de profile MisybaG, c'est-à-dire le chemin du\\n"
+"sous-répertoire correspondant dans :"
+
+#: misybag:37
+#, sh-format
+msgid ""
+"dir_name is the name of directory where new project will be created. The\\n"
+"directory is created if it does not exist. New project is created in current\\n"
+"directory if none given."
+msgstr ""
+"nom_du_répertoire est le nom du répertoire dans lequel le nouveau projet sera\\n"
+"créé. Le répertoire est créé s'il n'existe pas. Si ce nom n'est pas fourni, le\\n"
+"nouveau projet sera créé dans le répertoire courant."
+
+#: misybag:39
+#, sh-format
+msgid "${msbg_name} sys-install"
+msgstr "${msbg_name} sys-install"
+
+#: misybag:40
+#, sh-format
+msgid ""
+"Install the full target system. This will delete the current content on the\\n"
+"target."
+msgstr ""
+"Installer le système cible complet. Cela supprimera le contenu actuel sur la\\n"
+"cible"
+
+#: misybag:42
+#, sh-format
+msgid "${msbg_name} update"
+msgstr "${msbg_name} update"
+
+#: misybag:43
+#, sh-format
+msgid "Update the target system, using project configuration."
+msgstr "Mettre à jour le système cible, en utilisant la configuration du projet."
+
+#: misybag:85
+#, sh-format
+msgid "Missing profile"
+msgstr "Profile introuvable"
+
+#: misybag:90
+#, sh-format
+msgid "Profile directory ${profile_dir} does not exist"
+msgstr "Le répertoire de profile ${profile_dir} n'existe pas"
+
+#: misybag:110 misybag:156
+#, sh-format
+msgid "Missing toolchain directory ${SYSROOT}"
+msgstr "Répertoire de chaine de compilation ${SYSROOT} introuvable"
+
+#: misybag:140
+#, sh-format
+msgid "Project created on directory:"
+msgstr "Projet créé dans le répertoire :"
+
+#: misybag:142
+#, sh-format
+msgid "You should now mount your distant root to:"
+msgstr "Vous pouvez monter la racine distante dans :"
+
+#: misybag:153
+#, sh-format
+msgid "Toolchain directory is a link. Building environment is not clean."
+msgstr ""
+"Le répertoire de chaine de compilation est un lien. L'environnement de\n"
+"construction n'est pas propre."
+
+#: misybag:206
+#, sh-format
+msgid "Unknown action ${action}."
+msgstr "Action ${action} inconnue."

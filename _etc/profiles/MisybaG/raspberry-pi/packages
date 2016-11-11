@@ -1,0 +1,6 @@
+# Copyright © 2016 Stéphane Veyret stephane_DOT_veyret_AT_neptura_DOT_org
+# Distributed under the terms of the GNU General Public License v3
+
+# Raspberry Pi system package
+
+*sys-apps/rng-tools
