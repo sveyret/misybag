@@ -25,13 +25,13 @@ msgstr "Syntaxe : ${msbg_name} [new|sys-install|update] [paramètres]"
 #: misybag:33
 #, sh-format
 msgid "${msbg_name} new profile_name [dir_name]"
-msgstr "${msbg_name} new nom_du_profile [nom_du_répertoire]"
+msgstr "${msbg_name} new nom_du_profil [nom_du_répertoire]"
 
 #: misybag:34
 #, sh-format
 msgid "Create a new MisybaG project using given profile_name in dir_name."
 msgstr ""
-"Créer un nouveau projet MisybaG en utilisant les nom_du_profile et\\n"
+"Créer un nouveau projet MisybaG en utilisant les nom_du_profil et\\n"
 "nom_du_répertoire fournis."
 
 #: misybag:35
@@ -40,7 +40,7 @@ msgid ""
 "profile_name is a MisybaG profile name, i.e. the path of the sub-directory "
 "of:"
 msgstr ""
-"nom_du_profile est un nom de profile MisybaG, c'est-à-dire le chemin du\\n"
+"nom_du_profil est un nom de profil MisybaG, c'est-à-dire le chemin du\\n"
 "sous-répertoire correspondant dans :"
 
 #: misybag:37
@@ -81,12 +81,12 @@ msgstr "Mettre à jour le système cible, en utilisant la configuration du proje
 #: misybag:85
 #, sh-format
 msgid "Missing profile"
-msgstr "Profile introuvable"
+msgstr "Profil introuvable"
 
 #: misybag:90
 #, sh-format
 msgid "Profile directory ${profile_dir} does not exist"
-msgstr "Le répertoire de profile ${profile_dir} n'existe pas"
+msgstr "Le répertoire de profil ${profile_dir} n'existe pas"
 
 #: misybag:110 misybag:156
 #, sh-format
