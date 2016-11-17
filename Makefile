@@ -35,6 +35,11 @@ install:
 			install -D -m644 $${lang} "$(DESTDIR)/usr/share/locale/$$(basename $${lang} .mo)/LC_MESSAGES/MisybaG.mo"; \
 		fi \
 	done
+	for dir in $$(find "${DESTDIR}/etc/MisybaG" -type d); do \
+		if [[ -r "$${dir}/.keep" ]]; then \
+			rm -f "$${dir}/.keep"; \
+		fi \
+	done
 
 clean:
 	rm -f po/*.mo
