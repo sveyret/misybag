@@ -28,14 +28,14 @@ all: $(MO)
 
 install:
 	install -D -m755 misybag "$(DESTDIR)/usr/bin/misybag"
-	install -d -m755 "$(DESTDIR)/etc/MisybaG"
-	cp -dPR --preserve=mode -- _etc/* "$(DESTDIR)/etc/MisybaG"
+	install -d -m755 "$(DESTDIR)/usr/share/MisybaG"
+	cp -dPR --preserve=mode -- data/* "$(DESTDIR)/usr/share/MisybaG"
 	for lang in po/*.mo; do \
 		if [[ -f $${lang} ]]; then \
 			install -D -m644 $${lang} "$(DESTDIR)/usr/share/locale/$$(basename $${lang} .mo)/LC_MESSAGES/MisybaG.mo"; \
 		fi \
 	done
-	for dir in $$(find "${DESTDIR}/etc/MisybaG" -type d); do \
+	for dir in $$(find "${DESTDIR}/usr/share/MisybaG" -type d); do \
 		if [[ -r "$${dir}/.keep" ]]; then \
 			rm -f "$${dir}/.keep"; \
 		fi \
