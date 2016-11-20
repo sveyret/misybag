@@ -18,7 +18,7 @@
 ###############################################################################
 
 # Load configuration
-: ${MISYBAG_CONFIG_DIR:=/usr/share/MisybaG}
+: ${MISYBAG_CONFIG_DIR:="/usr/share/MisybaG"}
 source gettext.sh
 export TEXTDOMAIN=MisybaG
 

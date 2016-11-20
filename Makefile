@@ -16,10 +16,15 @@
 # MisybaG.  If not, see <http://www.gnu.org/licenses/>.
 ###############################################################################
 
-SRC= $(wildcard po/*.po)
-MO= $(SRC:.po=.mo)
+EXEC=misybag
+MO_SRC=$(wildcard po/*.po)
+MO=$(MO_SRC:.po=.mo)
+PREFIX=
 
-all: $(MO)
+all: $(EXEC) $(MO)
+
+misybag: misybag.sh
+	sed -e 's#^\:\ \$${MISYBAG_CONFIG_DIR:="#&$(PREFIX)#' $^ >$@
 
 # Building po files:
 # xgettext -o lang.po -F -j -L shell --from-code UTF-8 misybag
@@ -27,23 +32,24 @@ all: $(MO)
 	msgfmt -o $@ $<
 
 install:
-	install -D -m755 misybag "$(DESTDIR)/usr/bin/misybag"
-	install -d -m755 "$(DESTDIR)/usr/share/MisybaG"
-	cp -dPR --preserve=mode -- data/* "$(DESTDIR)/usr/share/MisybaG"
+	install -D -m755 misybag "$(DESTDIR)$(PREFIX)/usr/bin/misybag"
+	install -d -m755 "$(DESTDIR)$(PREFIX)/usr/share/MisybaG"
+	cp -dPR --preserve=mode -- data/* "$(DESTDIR)$(PREFIX)/usr/share/MisybaG"
 	for lang in po/*.mo; do \
 		if [[ -f $${lang} ]]; then \
-			install -D -m644 $${lang} "$(DESTDIR)/usr/share/locale/$$(basename $${lang} .mo)/LC_MESSAGES/MisybaG.mo"; \
+			install -D -m644 $${lang} "$(DESTDIR)$(PREFIX)/usr/share/locale/$$(basename $${lang} .mo)/LC_MESSAGES/MisybaG.mo"; \
 		fi \
 	done
-	for dir in $$(find "$(DESTDIR)/usr/share/MisybaG" -type d); do \
+	for dir in $$(find "$(DESTDIR)$(PREFIX)/usr/share/MisybaG" -type d); do \
 		if [[ -r "$${dir}/.keep" ]]; then \
 			rm -f "$${dir}/.keep"; \
 		fi \
 	done
 
 clean:
-	rm -f po/*.mo
 
 mrproper: clean
+	rm -f misybag
+	rm -f po/*.mo
 
 .PHONY: all install clean mrproper
