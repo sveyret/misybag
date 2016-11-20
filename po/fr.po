@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: MisybaG 0.1\n"
+"Project-Id-Version: MisybaG 1.0\n"
 "Report-Msgid-Bugs-To: Stéphane Veyret\n"
 "POT-Creation-Date: 2016-11-13 21:26+0100\n"
 "PO-Revision-Date: 2016-11-13 21:26+0100\n"
@@ -40,7 +40,7 @@ msgid ""
 "profile_name is a MisybaG profile name, i.e. the path of the sub-directory "
 "of:"
 msgstr ""
-"nom_du_profil est un nom de profil MisybaG, c'est-à-dire le chemin du\\n"
+"nom_du_profil est un nom de profil MisybaG, c’est-à-dire le chemin du\\n"
 "sous-répertoire correspondant dans :"
 
 #: misybag:37
@@ -51,7 +51,7 @@ msgid ""
 "directory if none given."
 msgstr ""
 "nom_du_répertoire est le nom du répertoire dans lequel le nouveau projet sera\\n"
-"créé. Le répertoire est créé s'il n'existe pas. Si ce nom n'est pas fourni, le\\n"
+"créé. Le répertoire est créé s’il n’existe pas. Si ce nom n’est pas fourni, le\\n"
 "nouveau projet sera créé dans le répertoire courant."
 
 #: misybag:39
@@ -86,9 +86,9 @@ msgstr "Profil introuvable"
 #: misybag:90
 #, sh-format
 msgid "Profile directory ${profile_dir} does not exist"
-msgstr "Le répertoire de profil ${profile_dir} n'existe pas"
+msgstr "Le répertoire de profil ${profile_dir} n’existe pas"
 
-#: misybag:110 misybag:156
+#: misybag:110 misybag:156 misybag:185
 #, sh-format
 msgid "Missing toolchain directory ${SYSROOT}"
 msgstr "Répertoire de chaine de compilation ${SYSROOT} introuvable"
@@ -107,10 +107,17 @@ msgstr "Vous pouvez monter la racine distante dans :"
 #, sh-format
 msgid "Toolchain directory is a link. Building environment is not clean."
 msgstr ""
-"Le répertoire de chaine de compilation est un lien. L'environnement de\n"
-"construction n'est pas propre."
+"Le répertoire de chaine de compilation est un lien. L’environnement de\n"
+"construction n’est pas propre."
 
-#: misybag:206
+#: misybag:181
+#, sh-format
+msgid "Toolchain does not symlink to ${ROOT}. Building environment is not clean."
+msgstr ""
+"La chaine de compilation n’est pas un lien sur ${ROOT}. L’environnement de\n"
+"construction n’est pas propre."
+
+#: misybag:218
 #, sh-format
 msgid "Unknown action ${action}."
 msgstr "Action ${action} inconnue."
