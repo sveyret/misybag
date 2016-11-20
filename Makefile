@@ -35,7 +35,7 @@ install:
 			install -D -m644 $${lang} "$(DESTDIR)/usr/share/locale/$$(basename $${lang} .mo)/LC_MESSAGES/MisybaG.mo"; \
 		fi \
 	done
-	for dir in $$(find "${DESTDIR}/usr/share/MisybaG" -type d); do \
+	for dir in $$(find "$(DESTDIR)/usr/share/MisybaG" -type d); do \
 		if [[ -r "$${dir}/.keep" ]]; then \
 			rm -f "$${dir}/.keep"; \
 		fi \
@@ -46,4 +46,4 @@ clean:
 
 mrproper: clean
 
-.PHONY: install clean mrproper
+.PHONY: all install clean mrproper
