@@ -176,6 +176,18 @@ sysInstall() {
 update() {
 	[[ -r _env ]] || exit 1
 	source _env
+	if [[ -L "${SYSROOT}" ]]; then
+		if [[ "$(realpath "${SYSROOT}")" != "$(realpath "${ROOT}")" ]]; then
+			echo -e $(eval_gettext "Toolchain does not symlink to \${ROOT}. Building environment is not clean.") >&2
+			exit 1
+		fi
+	elif [[ ! -d "${SYSROOT}" ]]; then
+		echo -e $(eval_gettext "Missing toolchain directory \${SYSROOT}") >&2
+		exit 1
+	else
+		rm -rf "${SYSROOT}"
+		ln -s "${ROOT}" "${SYSROOT}"
+	fi
 	cp -dPR --preserve=mode -- _layout/* "${ROOT}"
 	_custom/update.sh
 }
