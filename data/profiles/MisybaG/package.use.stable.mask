@@ -1,9 +1,113 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 # This file requires eapi 5 or later. New entries go on top.
 # Please use the same syntax as in package.use.mask
+
+# Bernard Cafarelli <voyageur@gentoo.org> (27 Nov 2017)
+# Dependencies have no stable keyword
+app-backup/backup-manager s3
+
+# Brian Evans <grknight@gentoo.org (6 Nov 2017)
+# Requires stable phpunit
+dev-php/PEAR-Text_Password test
+
+# Andreas Sturmlechner <asturm@gentoo.org> (22 Oct 2017)
+# Requires unmaintained unstable dependency net-libs/gloox.
+# The go flag requires stable masked dev-lang/go[gccgo].
+www-servers/uwsgi go pypy uwsgi_plugins_alarm_xmpp
+
+# Andreas Sturmlechner <asturm@gentoo.org> (11 Oct 2017)
+# Requires unstable dependency dev-qt/qtspeech.
+kde-apps/kanagram speech
+kde-apps/kdepim-runtime speech
+kde-apps/konqueror speech
+kde-apps/kpimtextedit speech
+kde-apps/ktp-text-ui speech
+kde-apps/okular speech
+kde-frameworks/knotifications speech
+kde-frameworks/ktextwidgets speech
+
+# Michael Palimaka <kensington@gentoo.org> (30 Sep 2017)
+# Required dependeny is not stable
+sci-libs/gdal mdb
+
+# Tim Harder <radhermit@gentoo.org> (11 Sep 2017)
+# Requires guile-2 which is still unstable.
+>=net-irc/weechat-1.7 guile
+
+# Andreas Sturmlechner <asturm@gentoo.org> (12 Aug 2017)
+# Not operational, bug #619534
+>=kde-apps/cantor-17.04.3 R
+
+# Michael Palimaka <kensington@gentoo.org) (11 Aug 2017)
+# Unstable dependencies.
+dev-util/rpmdevtools emacs
+
+# Patrick McLean <chutzpah@gentoo.org> (11 Jul 2017)
+# Requires >=net-dns/libidn2-2.0 stabilization
+net-dns/dnsmasq libidn2
+
+# Andreas Sturmlechner <asturm@gentoo.org> (23 Mar 2017)
+# Requires dev-lang/julia stabilisation, bug #613576
+kde-apps/cantor julia
+
+# Andreas Sturmlechner <asturm@gentoo.org> (22 Feb 2017)
+# Requires not yet stabilised sci-geosciences/grass,
+# which probably needs bump to solve several issues.
+sci-geosciences/qgis grass
+
+# Brian Dolbec <dolsen@gentoo.org> (14 Feb 2017)
+# This is stable masked as g-sorcery is being not actively developed.
+app-portage/layman g-sorcery
+
+# Mart Raudsepp <leio@gentoo.org> (13 Feb 2017)
+# No stable multilib supporting sys-libs/libunwind yet,
+# temporarily masked to let stabilization #601354 proceed.
+# The feature provided by this is also only useful for a
+# leak tracer, which is mostly useful for upstream CI testing.
+media-libs/gstreamer unwind
+
+# David Seifert <soap@gentoo.org> (12 Feb 2017)
+# Unknown future, stable deps are hopelessly
+# broken, only allow for unstable keywords
+# Bug: #581058
+net-misc/asterisk osplookup
+
+# Johannes Huber <johu@gentoo.org> (28 Jan 2017)
+# Unstable dependencies.
+media-plugins/kipi-plugins mediawiki vkontakte
+
+# Michael Palimaka <kensington@gentoo.org (26 Jan 2017)
+# Requires testing version of media-libs/opencv
+media-libs/mlt opencv
+
+# Matthias Maier <tamiko@gentoo.org> (22 Jan 2017)
+# sys-fs/zfs isn't going to be marked stable anytime soon
+app-emulation/libvirt zfs
+
+# Michael Palimaka <kensington@gentoo.org (18 Jan 2017)
+# www-client/weboob is horribly outdated and not stable
+app-office/kmymoney weboob
+
+# Andreas K. Hüttel <dilfridge@gentoo.org> (15 Jan 2017)
+# Has no stable reverse deps requiring this useflag
+# Stable-masking it so Boost 1.62 stabilization can go ahead
+sci-libs/vtk mpi
+
+# Doug Goldstein <cardoe@gentoo.org> (04 Jan 2017)
+# libcxx is not stable so we can't let users use it
+dev-lang/rust libcxx
+# llvm 3.8.x is not stable so we can't let users use it
+dev-lang/rust system-llvm
+
+# Alon Bar-Lev <alonbl@gentoo.org> (01 Jan 2017)
+# Will always require unstable packages.
+net-libs/gnutls test-full
+
+# Lars Wendler <polynomial-c@gentoo.org> (15 Dev 2016)
+# Requires php:7.0 and ruby:2.2 being stable
+>=dev-libs/Ice-3.6.3 php ruby
 
 # Pacho Ramos <pacho@gentoo.org> (19 Aug 2016)
 # Not ready to be stabilized yet.
@@ -20,47 +124,23 @@ dev-db/mariadb-galera sst-xtrabackup
 # Needs gcc-5 which is currently unstable
 dev-lang/go gccgo
 
-# Michael Palimaka <kensington@gentoo.org (17 Feb 2016)
-# Needs unsable media-libs/opencv
-media-gfx/nomacs qt5
-
 # Sergey Popov <pinkbyte@gentoo.org> (15 Feb 2016)
 # Mask monitoring capabilities of Ganeti on stable branches
 app-emulation/ganeti monitoring
 
-# Ian Delaney <idella4@gentoo.org> (04 Jan 2016)
-# on behalf of Ilya Tumaykin <itumaykin+gentoo@gmail.com>
-# media-libs/libcaca wasn't stabilized in the past, but now
-# it's ready for the next stable mpv release after the one below.
-=media-video/mpv-0.9.2-r1 libcaca
-
 # Mike Gilbert <floppym@gentoo.org> (03 Oct 2015)
-# Unmask python3.5 for python-exec
-dev-lang/python-exec -python_targets_python3_5
-
-# Andreas Huettel <dilfridge@gentoo.org> (26 Sep 2015)
-# Not stable enough for stable (Debian and SuSE disable it completely)
-=app-office/libreoffice-5.0* gtk3
-=app-office/libreoffice-5.1* gtk3
+# Unmask stable-masked implementations for python-exec
+dev-lang/python-exec -python_targets_python3_6
 
 # Pacho Ramos <pacho@gentoo.org> (15 May 2015)
 # Version compatible with current ffmpeg is not ready to be stabilized
 # bug #539212
 app-emulation/vice ffmpeg
 
-# Pacho Ramos <pacho@gentoo.org> (13 May 2015)
-# texinfo-5 cannot be stabilized yet
-=dev-lang/gnat-gcc-4.6* doc
-
 # Jeroen Roovers <jer@gentoo.org> (26 Apr 2015)
 # mongodb support is nice, but dev-libs/mongo-c-driver upstream is not ready
 # yet (bug #542210)
 net-analyzer/pmacct mongodb
-
-# Matthias Maier <tamiko@gentoo.org> (13 Mar 2015)
-# Masking glusterfs for the time being, see entry for app-emulation/qemu of
-# 12 Sep 2013: Waiting on glusterfs maintainers in bug #484016
-app-emulation/libvirt glusterfs
 
 # Pacho Ramos <pacho@gentoo.org>
 # sci-visualization/paraview is not ready for stabilization yet
@@ -86,7 +166,7 @@ media-libs/opencv vtk
 
 # Mikle Kolyada <zlogene@gentoo.org> (16 Aug 2014)
 # Not yet stabilized dependency, need more testing
->=dev-perl/PDL-2.4.11 pdl2 pgplot plplot
+>=dev-perl/PDL-2.4.11 pdl2 pgplot
 
 # Samuli Suominen <ssuominen@gentoo.org> (01 Aug 2014)
 # Optional (not required by anything in gentoo-x86) and fragile (based on
@@ -98,14 +178,6 @@ media-libs/libcaca java mono
 # Alon Bar-Lev <alonbl@gentoo.org> (21 Jul 2014)
 # dev-libs/opencryptoki will not be stabile any time soon (bug#510204)
 app-crypt/tpm-tools pkcs11
-
-# Andreas K. Huettel <dilfridge@gentoo.org> (29 Jun 2014)
-# Not yet stabilized dependencies blocking sec bug 514886
-app-office/libreoffice firebird
-
-# Agostino Sarubbo <ago@gentoo.org> (31 Aug 2013)
-# Clang is not stable
-app-portage/eix clang
 
 # Sergey Popov <pinkbyte@gentoo.org> (28 Oct 2013)
 # sys-cluster/cman is still in ~arch.
@@ -134,9 +206,3 @@ media-gfx/imagemagick opencl
 # Andreas K. Huettel <dilfridge@gentoo.org> (28 Mar 2013)
 # No stable sci-chemistry/avogadro yet but we want kde-4.10 to go stable
 >=kde-apps/kalzium-4.10.0 editor
-
-# Chris Reffett <creffett@gentoo.org> (23 Nov 2012)
-# CMake's PHP module can't find our install location, so
-# libkolab(xml) fails with the php flag enabled, bug #430858.
-net-libs/libkolab php
-net-libs/libkolabxml php
