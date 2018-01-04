@@ -51,8 +51,12 @@ createMakeConf() {
 	# Extract or calculate variables
 	local cflags=$(emerge --info | grep '^CFLAGS\s*=' | sed 's/CFLAGS\s*=\s*"\?\([^"]*\)"\?/\1/')
 	local chost="${1}"
-	local arch=$(grep '^ARCH=' "${SYSROOT}/etc/portage/make.conf" | sed 's/ARCH\s*=\s*"\?\([^"]*\)"\?/\1/')
-	local cbuild=$(grep '^CBUILD=' "${SYSROOT}/etc/portage/make.conf" | sed 's/CBUILD\s*=\s*"\?\([^"]*\)"\?/\1/')
+	local all_arch=""
+	local all_cbuild=""
+	if [[ ! -z "${SYSROOT}" ]]; then
+		all_arch="ARCH=\""$(grep '^ARCH=' "${SYSROOT}/etc/portage/make.conf" | sed 's/ARCH\s*=\s*"\?\([^"]*\)"\?/\1/')"\""
+		all_cbuild="CBUILD=\""$(grep '^CBUILD=' "${SYSROOT}/etc/portage/make.conf" | sed 's/CBUILD\s*=\s*"\?\([^"]*\)"\?/\1/')"\""
+	fi
 	local makeopts="-j$(nproc)"
 
 	# Create make.conf
@@ -60,8 +64,8 @@ createMakeConf() {
 		CFLAGS="${cflags}"
 		CXXFLAGS="\${CFLAGS}"
 
-		ARCH="${arch}"
-		CBUILD="${cbuild}"
+		${all_arch}
+		${all_cbuild}
 		CHOST="${chost}"
 		MAKEOPTS="${makeopts}"
 
@@ -110,6 +114,9 @@ new() {
 		echo -e $(eval_gettext "Missing toolchain directory \${SYSROOT}") >&2
 		exit 1
 	fi
+	if [[ ! -d "${SYSROOT}/etc/portage" ]]; then
+		unset SYSROOT
+	fi
 	createMakeConf "${chost}"
 	[[ -r /usr/share/portage/config/repos.conf ]] && \
 		cp /usr/share/portage/config/repos.conf "${PORTAGE_CONFIGROOT}"/etc/portage/repos.conf/gentoo.conf
@@ -119,10 +126,12 @@ new() {
 	mkdir -p "${ROOT}" || exit 1
 	cat >"${project_dir}"/_env <<-EOF
 		export ROOT="${ROOT}"
-		export SYSROOT="${SYSROOT}"
 		export PORTAGE_CONFIGROOT="${PORTAGE_CONFIGROOT}"
 		export EMERGE_LOG_DIR="${EMERGE_LOG_DIR}"
 	EOF
+	if [[ ! -z "${SYSROOT}" ]]; then
+		echo "export SYSROOT=\"${SYSROOT}\"" >>"${project_dir}"/_env
+	fi
 
 	# Patch
 	if [[ -r "${profile_dir}"/MisybaG.patch ]]; then
@@ -149,17 +158,19 @@ sysInstall() {
 	[[ -r _env ]] || exit 1
 	source _env
 	emerge -1 sys-apps/misybag-baselayout || exit 1
-	if [[ -L "${SYSROOT}" ]]; then
-		echo -e $(eval_gettext "Toolchain directory is a link. Building environment is not clean.") >&2
-		exit 1
-	elif [[ ! -d "${SYSROOT}" ]]; then
-		echo -e $(eval_gettext "Missing toolchain directory \${SYSROOT}") >&2
-		exit 1
+	if [[ ! -z "${SYSROOT}" ]]; then
+		if [[ -L "${SYSROOT}" ]]; then
+			echo -e $(eval_gettext "Toolchain directory is a link. Building environment is not clean.") >&2
+			exit 1
+		elif [[ ! -d "${SYSROOT}" ]]; then
+			echo -e $(eval_gettext "Missing toolchain directory \${SYSROOT}") >&2
+			exit 1
+		fi
+		rm -rf "${SYSROOT}"/etc/portage
+		cp -dPR "${SYSROOT}"/* "${ROOT}" || exit 1
+		rm -rf "${SYSROOT}"
+		ln -s "${ROOT}" "${SYSROOT}"
 	fi
-	rm -rf "${SYSROOT}"/etc/portage
-	cp -dPR "${SYSROOT}"/* "${ROOT}" || exit 1
-	rm -rf "${SYSROOT}"
-	ln -s "${ROOT}" "${SYSROOT}"
 	emerge --noreplace -1 @system || exit 1
 	if [[ -r _config/id_rsa.pub ]]; then
 		mkdir -p "${ROOT}"/root/.ssh || exit 1
@@ -176,7 +187,9 @@ sysInstall() {
 update() {
 	[[ -r _env ]] || exit 1
 	source _env
-	if [[ -L "${SYSROOT}" ]]; then
+	if [[ -z "${SYSROOT}" ]]; then
+		:
+	elif [[ -L "${SYSROOT}" ]]; then
 		if [[ "$(realpath "${SYSROOT}")" != "$(realpath "${ROOT}")" ]]; then
 			echo -e $(eval_gettext "Toolchain does not symlink to \${ROOT}. Building environment is not clean.") >&2
 			exit 1
