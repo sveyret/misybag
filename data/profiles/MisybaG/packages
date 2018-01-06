@@ -5,6 +5,7 @@
 # Here are the packages needed for a minimum MisybaG system
 
 *sys-apps/misybag-baselayout
-*net-misc/openssh
 *sys-apps/busybox
 *sys-apps/shadow
+*virtual/libc
+*virtual/ssh

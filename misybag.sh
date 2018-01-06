@@ -114,7 +114,7 @@ new() {
 		echo -e $(eval_gettext "Missing toolchain directory \${SYSROOT}") >&2
 		exit 1
 	fi
-	if [[ ! -d "${SYSROOT}/etc/portage" ]]; then
+	if [[ ! -d "${SYSROOT}/etc/portage" ]]; then # No cross-compilation
 		unset SYSROOT
 	fi
 	createMakeConf "${chost}"
@@ -158,19 +158,9 @@ sysInstall() {
 	[[ -r _env ]] || exit 1
 	source _env
 	emerge -1 sys-apps/misybag-baselayout || exit 1
-	if [[ ! -z "${SYSROOT}" ]]; then
-		if [[ -L "${SYSROOT}" ]]; then
-			echo -e $(eval_gettext "Toolchain directory is a link. Building environment is not clean.") >&2
-			exit 1
-		elif [[ ! -d "${SYSROOT}" ]]; then
-			echo -e $(eval_gettext "Missing toolchain directory \${SYSROOT}") >&2
-			exit 1
-		fi
-		rm -rf "${SYSROOT}"/etc/portage
-		cp -dPR "${SYSROOT}"/* "${ROOT}" || exit 1
-		rm -rf "${SYSROOT}"
-		ln -s "${ROOT}" "${SYSROOT}"
-	fi
+	local chost=$(emerge --info | grep '^CHOST\s*=' | sed 's/CHOST\s*=\s*"\?\([^"]*\)"\?/\1/')
+	mkdir -p "${ROOT}/usr/lib/gcc/${chost}" || exit 1
+	cp -dPR "${SYSROOT}/usr/lib/gcc/${chost}"/* "${ROOT}/usr/lib/gcc/${chost}" || exit 1
 	emerge --noreplace -1 @system || exit 1
 	if [[ -r _config/id_rsa.pub ]]; then
 		mkdir -p "${ROOT}"/root/.ssh || exit 1
@@ -187,20 +177,6 @@ sysInstall() {
 update() {
 	[[ -r _env ]] || exit 1
 	source _env
-	if [[ -z "${SYSROOT}" ]]; then
-		:
-	elif [[ -L "${SYSROOT}" ]]; then
-		if [[ "$(realpath "${SYSROOT}")" != "$(realpath "${ROOT}")" ]]; then
-			echo -e $(eval_gettext "Toolchain does not symlink to \${ROOT}. Building environment is not clean.") >&2
-			exit 1
-		fi
-	elif [[ ! -d "${SYSROOT}" ]]; then
-		echo -e $(eval_gettext "Missing toolchain directory \${SYSROOT}") >&2
-		exit 1
-	else
-		rm -rf "${SYSROOT}"
-		ln -s "${ROOT}" "${SYSROOT}"
-	fi
 	cp -dPR --preserve=mode -- _layout/* "${ROOT}"
 	_custom/update.sh
 }

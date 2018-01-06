@@ -34,12 +34,6 @@ Note that `make install` also support `DESTDIR` variable to install elsewhere th
 
 # Usage
 
-## Docker
-
-MisybaG « eats » the toolchain. As strongly suggested, *SYSROOT* links to /usr/*CTARGET*. But it is also suggested to merge *SYSROOT* and *ROOT*. For that reason, *SYSROOT* content will be moved to *ROOT*, then a symbolic link will be created from *SYSROOT* to *ROOT*. The toolchain will then not be usable for other system.
-
-For that reason, it is suggested to use containers, like *Docker*, in order to drive the MisybaG system. This way, it is possible to create a specific container for every system to be controlled.
-
 ## Preparation
 
 The first phase is preparation. It begins with the new project creation using the command:
@@ -67,7 +61,7 @@ MisybaG system installation is done by the command:
 
     misybag sys-install
 
-This command should only be executed once. This is indeed the command which will modify the *SYSROOT* directory on the Gentoo system. This command terminates with automatic execution of the update.
+This command should only be executed once. This command terminates with automatic execution of the update.
 
 ## Update
 
