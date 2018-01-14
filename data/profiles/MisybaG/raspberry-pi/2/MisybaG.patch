@@ -15,7 +15,7 @@ diff --no-dereference -Naur a/_layout/etc/init.d/heartbeat b/_layout/etc/init.d/
 +++ b/_layout/etc/init.d/heartbeat	2016-11-13 15:39:37.565360066 +0100
 @@ -0,0 +1,15 @@
 +#!/sbin/openrc-run
-+# Copyright © 2016 Stéphane Veyret stephane_DOT_veyret_AT_neptura_DOT_org
++# Copyright © 2018 Stéphane Veyret stephane_DOT_veyret_AT_neptura_DOT_org
 +# Distributed under the terms of the GNU General Public License v3
 +
 +start() {

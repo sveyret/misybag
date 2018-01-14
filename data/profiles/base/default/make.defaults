@@ -1,0 +1,5 @@
+# Copyright © 2018 Stéphane Veyret stephane_DOT_veyret_AT_neptura_DOT_org
+# Distributed under the terms of the GNU General Public License v3
+
+# Default starting set of USE flags for all MisybaG profiles.
+USE="${USE} -pam acl bindist cli crypt iconv ipv6 pcre seccomp session ssl unicode zlib"
