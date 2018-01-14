@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: MisybaG 1.0\n"
-"Report-Msgid-Bugs-To: Stéphane Veyret\n"
-"POT-Creation-Date: 2016-11-13 21:26+0100\n"
+"Project-Id-Version: MisybaG 2.0\n"
+"Report-Msgid-Bugs-To: Stéphane Veyret <stephane_DOT_veyret_AT_neptura_DOT_org>\n"
+"POT-Creation-Date: 2018-01-14 14:20+0100\n"
 "PO-Revision-Date: 2016-11-13 21:26+0100\n"
 "Last-Translator: Stéphane Veyret <stephane_DOT_veyret_AT_neptura_DOT_org>\n"
 "Language-Team: Stéphane Veyret <stephane_DOT_veyret_AT_neptura_DOT_org>\n"
@@ -31,8 +31,8 @@ msgstr "${msbg_name} new nom_du_profil [nom_du_répertoire]"
 #, sh-format
 msgid "Create a new MisybaG project using given profile_name in dir_name."
 msgstr ""
-"Créer un nouveau projet MisybaG en utilisant les nom_du_profil et\\n"
-"nom_du_répertoire fournis."
+"Créer un nouveau projet MisybaG en utilisant les nom_du_profil et"
+"\\nnom_du_répertoire fournis."
 
 #: misybag:35
 #, sh-format
@@ -40,19 +40,19 @@ msgid ""
 "profile_name is a MisybaG profile name, i.e. the path of the sub-directory "
 "of:"
 msgstr ""
-"nom_du_profil est un nom de profil MisybaG, c’est-à-dire le chemin du\\n"
-"sous-répertoire correspondant dans :"
+"nom_du_profil est un nom de profil MisybaG, c’est-à-dire le chemin du\\nsous-"
+"répertoire correspondant dans :"
 
 #: misybag:37
 #, sh-format
 msgid ""
-"dir_name is the name of directory where new project will be created. The\\n"
-"directory is created if it does not exist. New project is created in current\\n"
-"directory if none given."
+"dir_name is the name of directory where new project will be created. The"
+"\\ndirectory is created if it does not exist. New project is created in "
+"current\\ndirectory if none given."
 msgstr ""
-"nom_du_répertoire est le nom du répertoire dans lequel le nouveau projet sera\\n"
-"créé. Le répertoire est créé s’il n’existe pas. Si ce nom n’est pas fourni, le\\n"
-"nouveau projet sera créé dans le répertoire courant."
+"nom_du_répertoire est le nom du répertoire dans lequel le nouveau projet sera"
+"\\ncréé. Le répertoire est créé s’il n’existe pas. Si ce nom n’est pas "
+"fourni, le\\nnouveau projet sera créé dans le répertoire courant."
 
 #: misybag:39
 #, sh-format
@@ -62,11 +62,11 @@ msgstr "${msbg_name} sys-install"
 #: misybag:40
 #, sh-format
 msgid ""
-"Install the full target system. This will delete the current content on the\\n"
-"target."
+"Install the full target system. This will delete the current content on the"
+"\\ntarget."
 msgstr ""
-"Installer le système cible complet. Cela supprimera le contenu actuel sur la\\n"
-"cible"
+"Installer le système cible complet. Cela supprimera le contenu actuel sur la"
+"\\ncible"
 
 #: misybag:42
 #, sh-format
@@ -76,48 +76,35 @@ msgstr "${msbg_name} update"
 #: misybag:43
 #, sh-format
 msgid "Update the target system, using project configuration."
-msgstr "Mettre à jour le système cible, en utilisant la configuration du projet."
+msgstr ""
+"Mettre à jour le système cible, en utilisant la configuration du projet."
 
-#: misybag:85
+#: misybag:89
 #, sh-format
 msgid "Missing profile"
 msgstr "Profil introuvable"
 
-#: misybag:90
+#: misybag:94
 #, sh-format
 msgid "Profile directory ${profile_dir} does not exist"
 msgstr "Le répertoire de profil ${profile_dir} n’existe pas"
 
-#: misybag:110 misybag:156 misybag:185
+#: misybag:114
 #, sh-format
 msgid "Missing toolchain directory ${SYSROOT}"
 msgstr "Répertoire de chaine de compilation ${SYSROOT} introuvable"
 
-#: misybag:140
+#: misybag:149
 #, sh-format
 msgid "Project created on directory:"
 msgstr "Projet créé dans le répertoire :"
 
-#: misybag:142
+#: misybag:151
 #, sh-format
 msgid "You should now mount your distant root to:"
 msgstr "Vous pouvez monter la racine distante dans :"
 
-#: misybag:153
-#, sh-format
-msgid "Toolchain directory is a link. Building environment is not clean."
-msgstr ""
-"Le répertoire de chaine de compilation est un lien. L’environnement de\n"
-"construction n’est pas propre."
-
-#: misybag:181
-#, sh-format
-msgid "Toolchain does not symlink to ${ROOT}. Building environment is not clean."
-msgstr ""
-"La chaine de compilation n’est pas un lien sur ${ROOT}. L’environnement de\n"
-"construction n’est pas propre."
-
-#: misybag:218
+#: misybag:208
 #, sh-format
 msgid "Unknown action ${action}."
 msgstr "Action ${action} inconnue."

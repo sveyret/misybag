@@ -16,6 +16,12 @@
 # MisybaG.  If not, see <http://www.gnu.org/licenses/>.
 ###############################################################################
 
+# Application id
+APP_PACKNAME=MisybaG
+APP_VERSION=2.0
+APP_AUTHOR=Stéphane Veyret
+
+# Sources and targets
 EXEC=misybag
 MO_SRC=$(wildcard po/*.po)
 MO=$(MO_SRC:.po=.mo)
@@ -26,8 +32,13 @@ all: $(EXEC) $(MO)
 misybag: misybag.sh
 	sed -e 's#^\:\ \$${MISYBAG_CONFIG_DIR:="#&$(PREFIX)#' $^ >$@
 
-# Building po files:
-# xgettext -o lang.po -F -j -L shell --from-code UTF-8 misybag
+po/$(APP_PACKNAME).pot:
+	xgettext --package-name="$(APP_PACKNAME)" --package-version="$(APP_VERSION)" --copyright-holder="$(APP_AUTHOR)" -o "$@" -F -L shell --from-code UTF-8 misybag
+
+%.po: po/$(APP_PACKNAME).pot
+	[[ ! -f "$@" ]] || msgmerge -U "$@" "$<"
+	[[ -f "$@" ]] || msginit -o "$@" -i "$<" -l "$(notdir $*)" --no-translator
+
 %.mo: %.po
 	msgfmt -o $@ $<
 
