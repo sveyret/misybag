@@ -100,8 +100,8 @@ new() {
 	project_dir="$(cd "${project_dir}"; pwd)"
 
 	# Prepare layout
-	cp -dPR "${MISYBAG_CONFIG_DIR}"/skel/* "${project_dir}"/ || exit 1
-	echo "$(basename "${project_dir}")" >>"${project_dir}"/_layout/etc/hostname
+	cp -dnR "${MISYBAG_CONFIG_DIR}"/skel/* "${project_dir}"/ || exit 1
+	[[ -f "${project_dir}"/_layout/etc/hostname ]] || echo "$(basename "${project_dir}")" >"${project_dir}"/_layout/etc/hostname
 
 	# Prepare configuration
 	export PORTAGE_CONFIGROOT="${project_dir}"/_portage
@@ -160,7 +160,7 @@ sysInstall() {
 	emerge -1 sys-apps/misybag-baselayout || exit 1
 	local chost=$(emerge --info | grep '^CHOST\s*=' | sed 's/CHOST\s*=\s*"\?\([^"]*\)"\?/\1/')
 	mkdir -p "${ROOT}/usr/lib/gcc/${chost}" || exit 1
-	cp -dPR "${SYSROOT}/usr/lib/gcc/${chost}"/* "${ROOT}/usr/lib/gcc/${chost}" || exit 1
+	cp -dR "${SYSROOT}/usr/lib/gcc/${chost}"/* "${ROOT}/usr/lib/gcc/${chost}" || exit 1
 	emerge --noreplace -1 @system || exit 1
 	if [[ -r _config/id_rsa.pub ]]; then
 		mkdir -p "${ROOT}"/root/.ssh || exit 1
@@ -177,7 +177,7 @@ sysInstall() {
 update() {
 	[[ -r _env ]] || exit 1
 	source _env
-	cp -dPR --preserve=mode -- _layout/* "${ROOT}"
+	cp -dR --preserve=mode -- _layout/* "${ROOT}"
 	_custom/update.sh
 }
 
