@@ -178,6 +178,7 @@ update() {
 	[[ -r _env ]] || exit 1
 	source _env
 	cp -dR --preserve=mode -- _layout/* "${ROOT}"
+	emerge --update --newuse --deep @world
 	_custom/update.sh
 }
 
